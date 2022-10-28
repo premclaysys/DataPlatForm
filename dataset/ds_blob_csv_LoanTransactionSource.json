@@ -1,5 +1,5 @@
 {
-	"name": "ds_LoanTransactionSource",
+	"name": "ds_blob_csv_LoanTransactionSource",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_blob_realimedb_data",
@@ -22,7 +22,7 @@
 		"schema": [
 			{
 				"name": "Bal Seg Count",
-				"type": "String"
+				"type": "Integer"
 			},
 			{
 				"name": "Acct Number",
