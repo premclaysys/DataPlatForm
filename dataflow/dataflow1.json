@@ -172,8 +172,8 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          each(match(/* All input columns */ true()),",
-				"               /* Input name */ $$ = $$),",
+				"          each(match(/* All input columns */true()),",
+				"               /* Input name */$$ = $$),",
 				"          {Bal Seg Count}",
 				"     )) ~> sink1"
 			]
