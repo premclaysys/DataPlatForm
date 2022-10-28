@@ -91,7 +91,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     moveFiles: ['','LT_Processed'],",
+				"     moveFiles: ['LoanTransaction','LT_Processed'],",
 				"     wildcardPaths:['*.csv']) ~> LoanTransactionSource",
 				"LoanTransactionSource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
