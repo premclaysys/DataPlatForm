@@ -91,7 +91,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     moveFiles: ['LoanTransaction','LT_Processed']) ~> LoanTransactionSource",
+				"     moveFiles: ['LoanTransaction','LT_Processed'],",
+				"     wildcardPaths:['*.csv']) ~> LoanTransactionSource",
 				"LoanTransactionSource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -172,8 +173,8 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          each(match(/* All input columns */true()),",
-				"               /* Input name */$$ = $$),",
+				"          each(match(/* All input columns */ true()),",
+				"               /* Input name */ $$ = $$),",
 				"          {Bal Seg Count}",
 				"     )) ~> sink1"
 			]
