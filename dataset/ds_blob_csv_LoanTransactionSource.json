@@ -10,13 +10,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "rt_loan_0427201004490005_updated.csv",
 				"folderPath": "LoanTransaction",
 				"container": "az-opcon-nextly-container"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": true,
+			"firstRowAsHeader": false,
 			"quoteChar": "\""
 		},
 		"schema": [
