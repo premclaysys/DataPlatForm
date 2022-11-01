@@ -75,7 +75,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE [dbo].LoanTransaction_staging",
+						"sqlReaderQuery": "Truncate table loantransaction_staging",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
