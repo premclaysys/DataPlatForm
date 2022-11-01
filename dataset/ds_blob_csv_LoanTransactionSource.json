@@ -1,6 +1,10 @@
 {
 	"name": "ds_blob_csv_LoanTransactionSource",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_realtimedb_data",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
