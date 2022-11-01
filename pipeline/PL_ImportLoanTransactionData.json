@@ -82,7 +82,8 @@
 					"dataset": {
 						"referenceName": "ds_db_LoanTransactionStaging",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
