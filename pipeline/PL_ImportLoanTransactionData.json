@@ -52,7 +52,14 @@
 						{
 							"name": "LoanTransactionDataImportToStaging",
 							"type": "ExecuteDataFlow",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "ImportDataToLoanTransaction",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -78,7 +85,7 @@
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "LoanTransactionDataImportToStaging",
+									"activity": "TruncateStagingTable",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -103,14 +110,7 @@
 						{
 							"name": "TruncateStagingTable",
 							"type": "Lookup",
-							"dependsOn": [
-								{
-									"activity": "ImportDataToLoanTransaction",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
