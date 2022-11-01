@@ -34,9 +34,20 @@
 			{
 				"name": "IfFilesExists",
 				"type": "IfCondition",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "CheckingLoanTransactionFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.exists",
+						"type": "Expression"
+					},
 					"ifTrueActivities": [
 						{
 							"name": "LoanTransactionDataImportToStaging",
