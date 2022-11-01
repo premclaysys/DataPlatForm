@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "df_LoanTransactionDataImport",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -18,7 +18,7 @@
 						"referenceName": "ds_db_LoanTransactionStaging",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "LoanTransactionDestination"
 				}
 			],
 			"transformations": [],
@@ -239,7 +239,7 @@
 				"          {Post Time},",
 				"          each(match(/* All input columns */true()),",
 				"               /* Input name */$$ = $$)",
-				"     )) ~> sink1"
+				"     )) ~> LoanTransactionDestination"
 			]
 		}
 	}

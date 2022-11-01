@@ -1,9 +1,9 @@
 {
-	"name": "pipeline2",
+	"name": "PL_ImportLoanTransactionData",
 	"properties": {
 		"activities": [
 			{
-				"name": "LoanTransactionDataFlow",
+				"name": "LoanTransactionDataImportToStaging",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow1",
+						"referenceName": "df_LoanTransactionDataImport",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -31,7 +31,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "LoanTransactionDataFlow",
+						"activity": "LoanTransactionDataImportToStaging",
 						"dependencyConditions": [
 							"Succeeded"
 						]
