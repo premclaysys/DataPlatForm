@@ -83,7 +83,14 @@
 						{
 							"name": "ImportDataToLoanTransaction",
 							"type": "SqlServerStoredProcedure",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "LoanTransactionDataImportToStaging",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -93,7 +100,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"storedProcedureName": "[dbo].[Sp_LoadingLoanTransaction]"
+								"storedProcedureName": "[dbo].[Sp_LoanTransactionLoading]"
 							},
 							"linkedServiceName": {
 								"referenceName": "ls_sql_msu_realtimedb",
