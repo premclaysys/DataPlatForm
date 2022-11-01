@@ -75,7 +75,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "Truncate table loantransaction_staging",
+						"sqlReaderQuery": "Truncate table loantransaction_staging;\nselect count(LoanTransaction_stagingID) from loantransaction_staging;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
