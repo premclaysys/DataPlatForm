@@ -160,6 +160,8 @@
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
 										"modifiedDatetimeStart": "2022-11-28T00:00:00.330Z",
+										"wildcardFolderPath": "LoanTransaction",
+										"wildcardFileName": "*.csv",
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
