@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-nextly-dev-cus-002"
+		},
+		"ls_blob_realtimedb_data_connectionString": {
+			"value": ""
+		},
+		"ls_sql_msu_realtimedb_connectionString": {
+			"value": ""
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"value": "/subscriptions/930577be-9db4-468f-957b-6313085ddb6d/resourceGroups/rg-nextly-dev-cus-001/providers/Microsoft.Storage/storageAccounts/stnextlydevcus002"
+		}
+	}
+}
