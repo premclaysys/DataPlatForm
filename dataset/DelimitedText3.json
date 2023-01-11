@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "Pdf_908851640311222.pdf",
 				"folderPath": "Source",
 				"container": "test"
 			},
