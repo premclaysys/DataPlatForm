@@ -35,7 +35,7 @@
 				"     wildcardPaths:['*.csv']) ~> source1",
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     rowUrlColumn:'',",
+				"     rowFolderUrlColumn:'',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
