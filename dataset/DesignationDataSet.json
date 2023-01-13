@@ -1,0 +1,22 @@
+{
+	"name": "DesignationDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_realtimedb_data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Destination",
+				"container": "testabhirami"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
