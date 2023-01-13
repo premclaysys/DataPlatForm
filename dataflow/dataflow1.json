@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "SourceDFDS",
+						"referenceName": "SourceDataSet",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DesignatedDsDf",
+						"referenceName": "SourceDataSet",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -27,15 +27,19 @@
 				"          Column_1 as string,",
 				"          Column_2 as string,",
 				"          Column_3 as string,",
-				"          Column_4 as string,",
-				"          Column_5 as string,",
-				"          Column_6 as string",
+				"          Column_4 as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string",
+				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
