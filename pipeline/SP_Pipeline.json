@@ -22,7 +22,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[SP_AddStudents]",
+					"storedProcedureName": "[dbo].[SP_AddStudent]",
 					"storedProcedureParameters": {
 						"MARKS": {
 							"value": {
@@ -75,7 +75,7 @@
 					{
 						"activity": "Stored procedure1",
 						"dependencyConditions": [
-							"Completed"
+							"Failed"
 						]
 					}
 				],

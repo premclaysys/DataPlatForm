@@ -50,7 +50,10 @@
 							"type": "DateTime"
 						},
 						"sourcefilename": {
-							"value": "Sp_LogPipelineExecutionDetails",
+							"value": {
+								"value": "@pipeline().DataFactory",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"Status": {
