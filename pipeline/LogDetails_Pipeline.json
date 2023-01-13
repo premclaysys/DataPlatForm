@@ -31,6 +31,10 @@
 							},
 							"type": "String"
 						},
+						"lastModifieddate": {
+							"value": "2023-01-13 17:30:59",
+							"type": "DateTime"
+						},
 						"PipelineName": {
 							"value": {
 								"value": "@pipeline().Pipeline",
@@ -44,6 +48,10 @@
 								"type": "Expression"
 							},
 							"type": "DateTime"
+						},
+						"sourcefilename": {
+							"value": "Sp_LogPipelineExecutionDetails",
+							"type": "String"
 						},
 						"Status": {
 							"value": {
