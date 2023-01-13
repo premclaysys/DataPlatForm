@@ -18,19 +18,31 @@
 					"storedProcedureName": "[dbo].[SP_AddStudents]",
 					"storedProcedureParameters": {
 						"MARKS": {
-							"value": "65",
+							"value": {
+								"value": "@pipeline().parameters.pMarks",
+								"type": "Expression"
+							},
 							"type": "Int32"
 						},
 						"ROLL_NO": {
-							"value": "4",
+							"value": {
+								"value": "@pipeline().parameters.pRollNo",
+								"type": "Expression"
+							},
 							"type": "Int32"
 						},
 						"STUDENT_NAME": {
-							"value": "Tony",
+							"value": {
+								"value": "@pipeline().parameters.pStudentName",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"SUBJECT": {
-							"value": "Chemistry",
+							"value": {
+								"value": "@pipeline().parameters.pSubjectName",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -41,6 +53,24 @@
 				}
 			}
 		],
+		"parameters": {
+			"pMarks": {
+				"type": "int",
+				"defaultValue": 65
+			},
+			"pRollNo": {
+				"type": "int",
+				"defaultValue": 4
+			},
+			"pStudentName": {
+				"type": "string",
+				"defaultValue": "Tony"
+			},
+			"pSubjectName": {
+				"type": "string",
+				"defaultValue": "Chemistry"
+			}
+		},
 		"annotations": []
 	}
 }
