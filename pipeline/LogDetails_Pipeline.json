@@ -87,7 +87,7 @@
 			},
 			"pErrorMessage": {
 				"type": "string",
-				"defaultValue": "@activity('SP_Pipeline').Error.message"
+				"defaultValue": "Trigger Error"
 			}
 		},
 		"variables": {
