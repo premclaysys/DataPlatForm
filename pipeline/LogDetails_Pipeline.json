@@ -87,21 +87,7 @@
 			},
 			"pErrorMessage": {
 				"type": "string",
-				"defaultValue": "Trigger Error"
-			}
-		},
-		"variables": {
-			"ErrorLog": {
-				"type": "String"
-			},
-			"ErroLog": {
-				"type": "String"
-			},
-			"pipeline_error": {
-				"type": "String"
-			},
-			"Errordetails": {
-				"type": "String"
+				"defaultValue": "@activity('SP_Pipeline').Error.Message"
 			}
 		},
 		"annotations": []

@@ -55,7 +55,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"pErrorMessage": {
-							"value": "@pipeline().parameters.pErrorMessage",
+							"value": "@activity('SP_Pipeline').Error.message",
 							"type": "Expression"
 						}
 					}
