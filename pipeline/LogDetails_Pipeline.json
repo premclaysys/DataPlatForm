@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Stored procedure1",
+				"name": "Stored procedure2",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -88,6 +88,18 @@
 			"pStatus": {
 				"type": "string",
 				"defaultValue": "Failed"
+			}
+		},
+		"variables": {
+			"ErrorMessage": {
+				"type": "String"
+			},
+			"ErrorLog": {
+				"type": "String"
+			},
+			"Erroroutput": {
+				"type": "String",
+				"defaultValue": "@activity('Stored procedure1').Error?.message"
 			}
 		},
 		"annotations": []
