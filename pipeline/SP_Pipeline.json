@@ -67,7 +67,7 @@
 				"typeProperties": {
 					"variableName": "Erroroutput",
 					"value": {
-						"value": "@concat(activity('Stored procedure1').Error?.message)",
+						"value": "@activity('Stored procedure1').Error.message",
 						"type": "Expression"
 					}
 				}
