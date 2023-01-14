@@ -3,28 +3,22 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LogDetails_Pipeline",
-				"type": "ExecutePipeline",
+				"name": "CaptureErrorDetails",
+				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "SP_Pipeline",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "LogDetails_Pipeline",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"pErrorMessage": {
-							"value": "@activity('SP_Pipeline').output",
-							"type": "Expression"
-						}
+					"variableName": "Errordetails",
+					"value": {
+						"value": "@activity('SP_Pipeline').Error.Message",
+						"type": "Expression"
 					}
 				}
 			},
@@ -42,22 +36,28 @@
 				}
 			},
 			{
-				"name": "Set variable1",
-				"type": "SetVariable",
+				"name": "LogDetails_Pipeline",
+				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "SP_Pipeline",
+						"activity": "CaptureErrorDetails",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "pipeline_error",
-					"value": {
-						"value": "@activity('SP_Pipeline').output",
-						"type": "Expression"
+					"pipeline": {
+						"referenceName": "LogDetails_Pipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"pErrorMessage": {
+							"value": "@activity('SP_Pipeline').Error.message",
+							"type": "Expression"
+						}
 					}
 				}
 			}
@@ -65,7 +65,7 @@
 		"parameters": {
 			"pErrorMessage": {
 				"type": "string",
-				"defaultValue": "@activity('SP_Pipeline').output"
+				"defaultValue": "@activity('SP_Pipeline').Error.message"
 			}
 		},
 		"variables": {
@@ -73,6 +73,9 @@
 				"type": "String"
 			},
 			"pipeline_error": {
+				"type": "String"
+			},
+			"Errordetails": {
 				"type": "String"
 			}
 		},

@@ -51,26 +51,6 @@
 					"referenceName": "ls_sql_msu_realtimedb",
 					"type": "LinkedServiceReference"
 				}
-			},
-			{
-				"name": "CaptureErrorDetails",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Stored procedure1",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "ErroLog",
-					"value": {
-						"value": "@activity('Stored procedure1').Error.message",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"parameters": {
@@ -96,6 +76,12 @@
 				"type": "String"
 			},
 			"ErroLog": {
+				"type": "String"
+			},
+			"pipeline_error": {
+				"type": "String"
+			},
+			"Errordetails": {
 				"type": "String"
 			}
 		},
