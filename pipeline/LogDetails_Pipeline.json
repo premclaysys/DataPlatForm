@@ -87,7 +87,7 @@
 			},
 			"pErrorMessage": {
 				"type": "string",
-				"defaultValue": "@activity('SP_Pipeline').Error"
+				"defaultValue": "@activity('SP_Pipeline').Error.message"
 			}
 		},
 		"variables": {
@@ -95,6 +95,12 @@
 				"type": "String"
 			},
 			"ErroLog": {
+				"type": "String"
+			},
+			"pipeline_error": {
+				"type": "String"
+			},
+			"Errordetails": {
 				"type": "String"
 			}
 		},
