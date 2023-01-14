@@ -71,32 +71,6 @@
 						"type": "Expression"
 					}
 				}
-			},
-			{
-				"name": "LogDetails_Pipeline",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "CaptureErrorDetails",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "LogDetails_Pipeline",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"pErrorMessage": {
-							"value": "@activity('Stored procedure1').Error.message",
-							"type": "Expression"
-						}
-					}
-				}
 			}
 		],
 		"parameters": {
@@ -115,6 +89,11 @@
 			"pSubjectName": {
 				"type": "string",
 				"defaultValue": "Chemistry"
+			}
+		},
+		"variables": {
+			"ErrorLog": {
+				"type": "String"
 			}
 		},
 		"annotations": []
