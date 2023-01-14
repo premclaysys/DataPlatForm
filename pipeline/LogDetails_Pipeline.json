@@ -81,25 +81,13 @@
 			}
 		],
 		"parameters": {
-			"pErrorMessage": {
-				"type": "string",
-				"defaultValue": "TriggerError"
-			},
 			"pStatus": {
 				"type": "string",
 				"defaultValue": "Failed"
-			}
-		},
-		"variables": {
-			"ErrorMessage": {
-				"type": "String"
 			},
-			"ErrorLog": {
-				"type": "String"
-			},
-			"Erroroutput": {
-				"type": "String",
-				"defaultValue": "@activity('Stored procedure1').Error?.message"
+			"pErrorMessage": {
+				"type": "string",
+				"defaultValue": "@concat(activity('Stored procedure1').Error?.message)"
 			}
 		},
 		"annotations": []
