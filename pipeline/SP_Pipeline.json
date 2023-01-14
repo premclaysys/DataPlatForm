@@ -89,7 +89,13 @@
 						"referenceName": "LogDetails_Pipeline",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"pErrorMessage": {
+							"value": "@activity('Stored procedure1').Error.message",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
