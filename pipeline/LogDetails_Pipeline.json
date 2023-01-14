@@ -87,7 +87,7 @@
 			},
 			"pErrorMessage": {
 				"type": "string",
-				"defaultValue": "@concat(activity('Stored procedure1').Error?.message)"
+				"defaultValue": "@activity('Stored procedure1').Error.message"
 			}
 		},
 		"annotations": []
