@@ -1,0 +1,58 @@
+{
+	"name": "Combined",
+	"properties": {
+		"activities": [
+			{
+				"name": "LogDetails_Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_Pipeline",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "LogDetails_Pipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"pErrorMessage": {
+							"value": "@activity('SP_Pipeline').Error",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "SP_Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_Pipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"parameters": {
+			"pErrorMessage": {
+				"type": "string",
+				"defaultValue": "@activity('SP_Pipeline').Error"
+			}
+		},
+		"variables": {
+			"ErroLog": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

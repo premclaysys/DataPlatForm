@@ -65,7 +65,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "Erroroutput",
+					"variableName": "ErroLog",
 					"value": {
 						"value": "@activity('Stored procedure1').Error.message",
 						"type": "Expression"
@@ -93,6 +93,9 @@
 		},
 		"variables": {
 			"ErrorLog": {
+				"type": "String"
+			},
+			"ErroLog": {
 				"type": "String"
 			}
 		},
