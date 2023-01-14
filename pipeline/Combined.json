@@ -45,7 +45,7 @@
 		"parameters": {
 			"pErrorMessage": {
 				"type": "string",
-				"defaultValue": "@activity('SP_Pipeline').Error"
+				"defaultValue": "@activity('SP_Pipeline').output"
 			}
 		},
 		"variables": {
