@@ -7,9 +7,9 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "SP_Pipeline",
+						"activity": "Set variable1",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -22,7 +22,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"pErrorMessage": {
-							"value": "@activity('SP_Pipeline').Error",
+							"value": "@activity('SP_Pipeline').output",
 							"type": "Expression"
 						}
 					}
@@ -40,6 +40,26 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "SP_Pipeline",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pipeline_error",
+					"value": {
+						"value": "@activity('SP_Pipeline').output",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -50,6 +70,9 @@
 		},
 		"variables": {
 			"ErroLog": {
+				"type": "String"
+			},
+			"pipeline_error": {
 				"type": "String"
 			}
 		},
