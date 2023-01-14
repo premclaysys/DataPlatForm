@@ -59,7 +59,7 @@
 					{
 						"activity": "Stored procedure1",
 						"dependencyConditions": [
-							"Failed"
+							"Completed"
 						]
 					}
 				],
