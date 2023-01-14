@@ -1,0 +1,163 @@
+{
+	"name": "Error_Log",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[SP_AddStudent]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_sql_msu_realtimedb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "CaptureErrorDetails",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ErrorLog",
+					"value": {
+						"value": "@activity('Stored procedure1').Error.message",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "CaptureErrorDetails",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			},
+			{
+				"name": "Stored procedure2",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Sp_LogPipelineExecutionDetails]",
+					"storedProcedureParameters": {
+						"ErrorMessage": {
+							"value": {
+								"value": "@activity('Stored procedure1').Error.message",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"lastModifieddate": {
+							"value": "2023-01-13 17:30:59",
+							"type": "DateTime"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineStartTime": {
+							"value": {
+								"value": "@pipeline().TriggerTime",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"sourcefilename": {
+							"value": {
+								"value": "@pipeline().DataFactory",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Status": {
+							"value": {
+								"value": "@pipeline().parameters.pStatus",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_sql_msu_realtimedb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"pMarks": {
+				"type": "int",
+				"defaultValue": 65
+			},
+			"pRoll_No": {
+				"type": "int",
+				"defaultValue": 4
+			},
+			"pStudent_Name": {
+				"type": "string",
+				"defaultValue": "Tony"
+			},
+			"pSubject": {
+				"type": "string",
+				"defaultValue": "Chemistry"
+			},
+			"pStatus": {
+				"type": "string",
+				"defaultValue": "Failed"
+			},
+			"PErrorMessage": {
+				"type": "string",
+				"defaultValue": "@activity('Stored procedure1').Error.message"
+			}
+		},
+		"variables": {
+			"ErrorLog": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
