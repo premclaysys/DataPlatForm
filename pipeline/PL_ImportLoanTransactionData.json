@@ -20,7 +20,9 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"exists"
+						"exists",
+						"childItems",
+						"lastModified"
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
@@ -37,7 +39,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "ForEach1",
+						"activity": "ForEachChildItem",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -138,7 +140,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEachChildItem",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -150,6 +152,11 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.childItems",
+						"type": "Expression"
+					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Get ModifiedDateoftheCurrentFile",
@@ -168,14 +175,72 @@
 									"referenceName": "ds_blob_csv_LoanTransactionSource",
 									"type": "DatasetReference"
 								},
-								"fieldList": [],
+								"fieldList": [
+									"itemName",
+									"lastModified"
+								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
 									"type": "DelimitedTextReadSettings"
 								}
+							}
+						},
+						{
+							"name": "If CurrentModifiedDate greater than PrevDate",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Get ModifiedDateoftheCurrentFile",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@less(ticks(activity('Get ModifiedDateoftheCurrentFile').output.lastModified),ticks(formatDateTime(variables('smallestmodifieddate'))))",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Set currentmodifieddate",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "smallestmodifieddate",
+											"value": {
+												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.lastModified",
+												"type": "Expression"
+											}
+										}
+									},
+									{
+										"name": "Set First file",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Set currentmodifieddate",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "filename",
+											"value": {
+												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.itemName",
+												"type": "Expression"
+											}
+										}
+									}
+								]
 							}
 						}
 					]
@@ -183,6 +248,17 @@
 			}
 		],
 		"concurrency": 1,
+		"variables": {
+			"filename": {
+				"type": "String"
+			},
+			"currentmodifieddate": {
+				"type": "String"
+			},
+			"smallestmodifieddate": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
