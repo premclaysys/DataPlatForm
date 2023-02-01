@@ -20,10 +20,12 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"exists"
+						"exists",
+						"childItems",
+						"lastModified"
 					],
 					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
+						"type": "AzureBlobFSReadSettings",
 						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
@@ -37,7 +39,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "CheckingLoanTransactionFiles",
+						"activity": "ForEachChildItem",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -133,13 +135,203 @@
 								},
 								"firstRowOnly": false
 							}
+						},
+						{
+							"name": "Logging Errors If file Exists",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "TruncateStagingTable",
+									"dependencyConditions": [
+										"Failed"
+									]
+								},
+								{
+									"activity": "LoanTransactionDataImportToStaging",
+									"dependencyConditions": [
+										"Failed"
+									]
+								},
+								{
+									"activity": "ImportDataToLoanTransaction",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"linkedServiceName": {
+								"referenceName": "ls_sql_msu_realtimedb",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
+			},
+			{
+				"name": "ForEachChildItem",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "CheckingLoanTransactionFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.childItems",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "If CurrentModifiedDate greater than PrevDate",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Get ModifiedDateoftheCurrentFile",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@less(ticks(activity('Get ModifiedDateoftheCurrentFile').output.lastModified),ticks(formatDateTime(variables('smallestmodifieddate'))))",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Set First file",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Set currentmodifieddate",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "filename",
+											"value": {
+												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.itemName",
+												"type": "Expression"
+											}
+										}
+									},
+									{
+										"name": "Set currentmodifieddate",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "smallestmodifieddate",
+											"value": {
+												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.lastModified",
+												"type": "Expression"
+											}
+										}
+									}
+								]
+							}
+						},
+						{
+							"name": "Get ModifiedDateoftheCurrentFile",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "ds_blob_csv_LoanTransactionSource",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"itemName",
+									"lastModified"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Logging Errors",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "CheckingLoanTransactionFiles",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "ForEachChildItem",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "IfFilesExists",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "ls_sql_msu_realtimedb",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2022-11-30T11:15:51Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"concurrency": 1,
+		"variables": {
+			"filename": {
+				"type": "String"
+			},
+			"currentmodifieddate": {
+				"type": "String"
+			},
+			"smallestmodifieddate": {
+				"type": "String",
+				"defaultValue": "@{utcnow()}"
+			}
+		},
+		"annotations": []
+	}
 }
