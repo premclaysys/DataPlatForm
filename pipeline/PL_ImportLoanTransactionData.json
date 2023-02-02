@@ -250,19 +250,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Error in LoanTransactionFiles",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Error in Modified date",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Error if file does not exist",
+						"activity": "Capture Error Details",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -281,7 +269,7 @@
 					"storedProcedureParameters": {
 						"ErrorMessage": {
 							"value": {
-								"value": "@activity('CheckingLoanTransactionFiles').Error.message",
+								"value": "@activity('IfFilesExists').Error.message",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -317,20 +305,6 @@
 						"Status": {
 							"value": null,
 							"type": "String"
-						},
-						"ErrorMessage1": {
-							"value": {
-								"value": "@activity('ForEachChildItem').Error.message",
-								"type": "Expression"
-							},
-							"type": "String"
-						},
-						"ErrorMessage2": {
-							"value": {
-								"value": "@activity('IfFilesExists').Error.message",
-								"type": "Expression"
-							},
-							"type": "String"
 						}
 					}
 				},
@@ -340,47 +314,7 @@
 				}
 			},
 			{
-				"name": "Error in LoanTransactionFiles",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "CheckingLoanTransactionFiles",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "ErrorMessage",
-					"value": {
-						"value": "@activity('CheckingLoanTransactionFiles').Error.message",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Error in Modified date",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "ForEachChildItem",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "ErrorMessage",
-					"value": {
-						"value": "@activity('ForEachChildItem').Error.message",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Error if file does not exist",
+				"name": "Capture Error Details",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
@@ -392,7 +326,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "ErrorMessage",
+					"variableName": "ErrorLog",
 					"value": {
 						"value": "@activity('IfFilesExists').Error.message",
 						"type": "Expression"
@@ -413,6 +347,9 @@
 				"defaultValue": "@{utcnow()}"
 			},
 			"ErrorMessage": {
+				"type": "String"
+			},
+			"ErrorLog": {
 				"type": "String"
 			}
 		},
