@@ -404,12 +404,6 @@
 			}
 		],
 		"concurrency": 1,
-		"parameters": {
-			"pStatus": {
-				"type": "string",
-				"defaultValue": "failed"
-			}
-		},
 		"variables": {
 			"filename": {
 				"type": "String"
