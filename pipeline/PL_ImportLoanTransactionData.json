@@ -315,10 +315,7 @@
 							"type": "String"
 						},
 						"Status": {
-							"value": {
-								"value": "@pipeline().parameters.pStatus",
-								"type": "Expression"
-							},
+							"value": null,
 							"type": "String"
 						},
 						"ErrorMessage1": {
