@@ -167,6 +167,9 @@
 								"secureInput": false
 							},
 							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[Sp_LogPipelineExecutionDetails]"
+							},
 							"linkedServiceName": {
 								"referenceName": "ls_sql_msu_realtimedb",
 								"type": "LinkedServiceReference"
@@ -271,6 +274,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
