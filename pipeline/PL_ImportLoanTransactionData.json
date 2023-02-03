@@ -20,9 +20,9 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
+						"exists",
 						"childItems",
-						"lastModified",
-						"exists"
+						"lastModified"
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
@@ -270,9 +270,6 @@
 				"type": "String"
 			},
 			"FileError": {
-				"type": "String"
-			},
-			"Adharsh": {
 				"type": "String"
 			},
 			"GetMetaDataError": {
