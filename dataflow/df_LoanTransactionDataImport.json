@@ -24,8 +24,8 @@
 			"transformations": [],
 			"scriptLines": [
 				"parameters{",
-				"     inputfile as string,",
-				"     destinationfile as string",
+				"     inputfile as string (\" az-opcon-nextly-container/LoanTransaction/rt_loan_0929202200000001.csv\"),",
+				"     destinationfile as string (\"abc.csv\")",
 				"}",
 				"source(output(",
 				"          {Bal Seg Count} as integer,",
