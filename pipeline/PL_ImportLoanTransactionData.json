@@ -271,12 +271,6 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Capture Error Details",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "FileError",
 						"dependencyConditions": [
 							"Succeeded"
