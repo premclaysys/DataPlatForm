@@ -136,6 +136,19 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Capture Error Details",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ErrorLog",
+					"value": {
+						"value": "@activity('IfFilesExists').Error.message",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {

@@ -74,7 +74,11 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "df_LoanTransactionDataImport",
-									"type": "DataFlowReference"
+									"type": "DataFlowReference",
+									"parameters": {
+										"inputfile": "\" az-opcon-nextly-container/LoanTransaction/rt_loan_0929202200000001.csv\"",
+										"destinationfile": "\"abc.csv\""
+									}
 								},
 								"compute": {
 									"coreCount": 8,
@@ -244,26 +248,6 @@
 							}
 						}
 					]
-				}
-			},
-			{
-				"name": "Capture Error Details",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "IfFilesExists",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "ErrorLog",
-					"value": {
-						"value": "@activity('IfFilesExists').Error.message",
-						"type": "Expression"
-					}
 				}
 			}
 		],
