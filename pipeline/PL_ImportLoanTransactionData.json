@@ -275,6 +275,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "FileError",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"policy": {
@@ -290,7 +296,7 @@
 					"storedProcedureParameters": {
 						"ErrorMessage": {
 							"value": {
-								"value": "@activity('IfFilesExists').Error.message",
+								"value": "@variables('GetMetaDataError')",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -333,6 +339,26 @@
 					"referenceName": "ls_sql_msu_realtimedb",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "FileError",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "CheckingLoanTransactionFiles",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "GetMetaDataError",
+					"value": {
+						"value": "@activity('CheckingLoanTransactionFiles').Error.message",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"concurrency": 1,
@@ -351,6 +377,15 @@
 				"type": "String"
 			},
 			"ErrorLog": {
+				"type": "String"
+			},
+			"FileError": {
+				"type": "String"
+			},
+			"Adharsh": {
+				"type": "String"
+			},
+			"GetMetaDataError": {
 				"type": "String"
 			}
 		},
