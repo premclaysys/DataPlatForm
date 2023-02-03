@@ -296,7 +296,7 @@
 					"storedProcedureParameters": {
 						"ErrorMessage": {
 							"value": {
-								"value": "@variables('GetMetaDataError')",
+								"value": "@activity('CheckingLoanTransactionFiles').Error.message",
 								"type": "Expression"
 							},
 							"type": "String"
