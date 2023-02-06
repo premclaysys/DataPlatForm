@@ -2,16 +2,16 @@
 	"name": "ds_blob_csv_LoanTransactionSource",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage1",
+			"referenceName": "ls_blob_realtimedb_data",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
+				"type": "AzureBlobStorageLocation",
 				"folderPath": "LoanTransaction",
-				"fileSystem": "az-opcon-nextly-container"
+				"container": "az-opcon-nextly-container"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
