@@ -249,15 +249,8 @@
 		],
 		"concurrency": 1,
 		"variables": {
-			"filename": {
-				"type": "String"
-			},
 			"currentmodifieddate": {
 				"type": "String"
-			},
-			"smallestmodifieddate": {
-				"type": "String",
-				"defaultValue": "@{utcnow()}"
 			},
 			"ErrorMessage": {
 				"type": "String"
