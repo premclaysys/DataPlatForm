@@ -24,7 +24,7 @@
 			"transformations": [],
 			"scriptLines": [
 				"parameters{",
-				"     inputfile as string (\"az-opcon-nextly-container/LoanTransaction/rt_loan_0929202200000001.csv\"),",
+				"     inputfile as string (\"az-opcon-nextly-container/LoanTransaction/rt_loan_0929202200000001 - Copy.csv\"),",
 				"     destinationfile as string (\"abc.csv\")",
 				"}",
 				"source(output(",
