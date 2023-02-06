@@ -205,11 +205,7 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "df_LoanTransactionDataImport",
-									"type": "DataFlowReference",
-									"parameters": {
-										"inputfile": "\"az-opcon-nextly-container/LoanTransaction/rt_loan_0929202200000001.csv\"",
-										"destinationfile": "\"abc.csv\""
-									}
+									"type": "DataFlowReference"
 								},
 								"compute": {
 									"coreCount": 8,
