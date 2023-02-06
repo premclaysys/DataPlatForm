@@ -1,0 +1,267 @@
+{
+	"name": "LoanTransactionDataCopy",
+	"properties": {
+		"activities": [
+			{
+				"name": "CheckingLoanTransactionFiles",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_blob_csv_LoanTransactionSource",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"exists",
+						"childItems",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "ForEachChildItem",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "CheckingLoanTransactionFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.childItems",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Get ModifiedDateoftheCurrentFile",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "ds_blob_csv_LoanTransactionSource",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"itemName",
+									"lastModified"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "If CurrentModifiedDate greater than PrevDate",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Get ModifiedDateoftheCurrentFile",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@less(ticks(activity('Get ModifiedDateoftheCurrentFile').output.lastModified),ticks(formatDateTime(variables('smallestmodifieddate'))))",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Set currentmodifieddate",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "smallestmodifieddate",
+											"value": {
+												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.lastModified",
+												"type": "Expression"
+											}
+										}
+									},
+									{
+										"name": "Set First file",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Set currentmodifieddate",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "filename",
+											"value": {
+												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.itemName",
+												"type": "Expression"
+											}
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "IfFilesExists",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "ForEachChildItem",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.exists",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "TruncateStagingTable",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": "Truncate table loantransaction_staging;\r\nselect count(LoanTransaction_stagingID) from loantransaction_staging;",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "ds_db_LoanTransactionStaging",
+									"type": "DatasetReference"
+								},
+								"firstRowOnly": false
+							}
+						},
+						{
+							"name": "LoanTransactionDataImportToStaging",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "TruncateStagingTable",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "df_LoanTransactionDataImport",
+									"type": "DataFlowReference",
+									"parameters": {
+										"inputfile": "\"az-opcon-nextly-container/LoanTransaction/rt_loan_0929202200000001.csv\"",
+										"destinationfile": "\"abc.csv\""
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						},
+						{
+							"name": "ImportDataToLoanTransaction",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "LoanTransactionDataImportToStaging",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[Sp_LoanTransactionLoading]"
+							},
+							"linkedServiceName": {
+								"referenceName": "ls_sql_msu_realtimedb",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"concurrency": 1,
+		"variables": {
+			"smallestmodifieddate": {
+				"type": "String",
+				"defaultValue": "@{utcnow()}"
+			},
+			"filename": {
+				"type": "String"
+			},
+			"currentmodifieddate": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
