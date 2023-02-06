@@ -23,10 +23,6 @@
 			],
 			"transformations": [],
 			"scriptLines": [
-				"parameters{",
-				"     inputfile as string,",
-				"     destinationfile as string",
-				"}",
 				"source(output(",
 				"          {Bal Seg Count} as integer,",
 				"          {Acct Number} as string,",
