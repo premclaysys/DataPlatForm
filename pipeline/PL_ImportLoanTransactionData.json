@@ -163,7 +163,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Get ModifiedDateoftheCurrentFile",
+							"name": "GetModifiedDateoftheCurrentFile",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
@@ -181,10 +181,12 @@
 								},
 								"fieldList": [
 									"itemName",
+									"lastModified",
 									"lastModified"
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -197,7 +199,7 @@
 							"type": "IfCondition",
 							"dependsOn": [
 								{
-									"activity": "Get ModifiedDateoftheCurrentFile",
+									"activity": "GetModifiedDateoftheCurrentFile",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -206,7 +208,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@less(ticks(activity('Get ModifiedDateoftheCurrentFile').output.lastModified),ticks(formatDateTime(variables('smallestmodifieddate'))))",
+									"value": "@less(ticks(activity('GetModifiedDateoftheCurrentFile').output.lastModified),ticks(formatDateTime(variables('smallestmodifieddate'))))",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
