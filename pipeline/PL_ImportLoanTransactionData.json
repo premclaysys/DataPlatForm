@@ -120,11 +120,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"items": {
-						"value": "@activity('CheckingLoanTransactionFiles').output.childItems",
-						"type": "Expression"
-					},
-					"isSequential": true,
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "If CurrentModifiedDate greater than PrevDate",
@@ -233,7 +229,6 @@
 					},
 					"fieldList": [
 						"exists",
-						"childItems",
 						"lastModified"
 					],
 					"storeSettings": {
