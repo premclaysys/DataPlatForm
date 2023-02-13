@@ -348,12 +348,6 @@
 			"ErrorLog": {
 				"type": "String"
 			},
-			"FileError": {
-				"type": "String"
-			},
-			"GetMetaDataError": {
-				"type": "String"
-			},
 			"filename": {
 				"type": "String"
 			},
