@@ -200,10 +200,6 @@
 									}
 								},
 								"fieldList": [
-									{
-										"value": "@item().lastModified",
-										"type": "Expression"
-									},
 									"itemName",
 									"exists"
 								],
