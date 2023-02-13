@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "rt_loan_0929202200000001 - Copy.csv",
 				"folderPath": "LoanTransaction",
 				"container": "az-opcon-nextly-container"
 			},
