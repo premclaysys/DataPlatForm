@@ -181,7 +181,6 @@
 								},
 								"fieldList": [
 									"itemName",
-									"lastModified",
 									"lastModified"
 								],
 								"storeSettings": {
