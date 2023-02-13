@@ -220,7 +220,7 @@
 										"typeProperties": {
 											"variableName": "smallestmodifieddate",
 											"value": {
-												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.lastModified",
+												"value": "@activity('GetModifiedDateoftheCurrentFile').output.lastModified",
 												"type": "Expression"
 											}
 										}
@@ -240,7 +240,7 @@
 										"typeProperties": {
 											"variableName": "filename",
 											"value": {
-												"value": "@activity('Get ModifiedDateoftheCurrentFile').output.itemName",
+												"value": "@activity('GetModifiedDateoftheCurrentFile').output.itemName",
 												"type": "Expression"
 											}
 										}
