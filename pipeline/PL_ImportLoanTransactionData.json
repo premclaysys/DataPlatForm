@@ -27,8 +27,8 @@
 					},
 					"fieldList": [
 						"exists",
-						"lastModified",
-						"childItems"
+						"childItems",
+						"lastModified"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
