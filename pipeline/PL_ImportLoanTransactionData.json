@@ -228,7 +228,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@less(ticks(activity('GetModifiedDateoftheCurrentFile').output.lastModified),ticks(formatDateTime(variables('smallestmodifieddate'))))",
+									"value": "@less(ticks(activity('GetModifiedDateoftheCurrentFile').output.lastModifieddate),ticks(formatDateTime(variables('smallestmodifieddate'))))",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
