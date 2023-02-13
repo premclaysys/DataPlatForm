@@ -199,7 +199,10 @@
 										}
 									}
 								},
-								"fieldList": [],
+								"fieldList": [
+									"lastModified",
+									"itemName"
+								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
