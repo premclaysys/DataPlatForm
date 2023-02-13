@@ -121,7 +121,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('CheckingLoanTransactionFiles').output.lastModified",
+						"value": "@activity('CheckingLoanTransactionFiles').output.childItems",
 						"type": "Expression"
 					},
 					"isSequential": true,
