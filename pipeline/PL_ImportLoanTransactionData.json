@@ -195,7 +195,13 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "ds_blob_csv_LoanTransactionSource",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@variables('filename')",
+											"type": "Expression"
+										}
+									}
 								},
 								"fieldList": [
 									"itemName",
@@ -229,7 +235,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "ds_blob_csv_LoanTransactionSource",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('filename')",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"exists",
