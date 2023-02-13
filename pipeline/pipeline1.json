@@ -75,6 +75,80 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Capture Error Details",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ErrorLog",
+					"value": {
+						"value": "@activity('IfFilesExists').Error.message",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Logging Errors",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Sp_LogPipelineExecutionDetails]",
+					"storedProcedureParameters": {
+						"ErrorMessage": {
+							"value": {
+								"value": "@activity('IfFilesExists').Error.message",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"lastModifieddate": {
+							"value": {
+								"value": "@activity('CheckingLoanTransactionFiles').output.lastModified",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineStartTime": {
+							"value": {
+								"value": "@pipeline().TriggerTime",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"sourcefilename": {
+							"value": {
+								"value": "@activity('Get ModifiedDateoftheCurrentFile').output.itemName",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Status": {
+							"value": "Failed",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_sql_msu_realtimedb",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"variables": {
