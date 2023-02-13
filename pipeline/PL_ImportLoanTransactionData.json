@@ -299,7 +299,7 @@
 						},
 						"lastModifieddate": {
 							"value": {
-								"value": "@activity('CheckingLoanTransactionFiles').output.lastModified",
+								"value": "@variables('smallestmodifieddate')",
 								"type": "Expression"
 							},
 							"type": "DateTime"
@@ -320,7 +320,7 @@
 						},
 						"sourcefilename": {
 							"value": {
-								"value": "@activity('Get ModifiedDateoftheCurrentFile').output.itemName",
+								"value": "@variables('filename')",
 								"type": "Expression"
 							},
 							"type": "String"
