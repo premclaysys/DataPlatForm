@@ -120,7 +120,11 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"isSequential": false,
+					"items": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.lastModified",
+						"type": "Expression"
+					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "If CurrentModifiedDate greater than PrevDate",
