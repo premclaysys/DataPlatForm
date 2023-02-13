@@ -84,6 +84,14 @@
 									"parameters": {
 										"inputfile": "\"az-opcon-nextly-container/LoanTransaction/rt_loan_0929202200000001 - Copy.csv\"",
 										"destinationfile": "\"abc.csv\""
+									},
+									"datasetParameters": {
+										"LoanTransactionSource": {
+											"filename": {
+												"value": "@variables('filename')",
+												"type": "Expression"
+											}
+										}
 									}
 								},
 								"compute": {
