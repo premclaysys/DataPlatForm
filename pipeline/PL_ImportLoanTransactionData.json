@@ -375,7 +375,8 @@
 				"type": "String"
 			},
 			"smallestmodifieddate": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "@{utcnow()}"
 			}
 		},
 		"annotations": []
