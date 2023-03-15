@@ -1,0 +1,65 @@
+{
+	"name": "DataTransferSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_msu_realtimedb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "LoanID",
+				"type": "varchar"
+			},
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "PartyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanStatusGroup",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanFamilyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanTypeCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanOpenDate",
+				"type": "date"
+			},
+			{
+				"name": "LoanCloseDate",
+				"type": "varchar"
+			},
+			{
+				"name": "CurrentBalance",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "CreditLimit",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "LoanMaturityDate",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Mktg.Loan"
+		}
+	}
+}
