@@ -1,0 +1,188 @@
+{
+	"name": "trial",
+	"properties": {
+		"activities": [
+			{
+				"name": "CheckingLoanTransactionFiles",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_blob_csv_LoanTransactionSource",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('filename')",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists",
+						"childItems",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "CheckingLoanTransactionFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.childItems",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Get Metadate2",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "ds_blob_csv_LoanTransactionSource",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								},
+								"fieldList": [
+									"itemName",
+									"lastModified"
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Get Metadate2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@less(ticks(activity('Get Metadate2').output.lastModified),ticks(formatDateTime(variables('smallestmodifieddate'))))",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Set current modified",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "smallestmodifieddate",
+											"value": {
+												"value": "@activity('Get Metadate2').output.lastModified",
+												"type": "Expression"
+											}
+										}
+									},
+									{
+										"name": "Set filename",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Set current modified",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "filename",
+											"value": {
+												"value": "@activity('Get Metadate2').output.itemName",
+												"type": "Expression"
+											}
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "If Condition2",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('CheckingLoanTransactionFiles').output.exists",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"filename": {
+				"type": "String"
+			},
+			"currentmodifieddate": {
+				"type": "String"
+			},
+			"smallestmodifieddate": {
+				"type": "String",
+				"defaultValue": "@{utcnow()}"
+			}
+		},
+		"annotations": []
+	}
+}
