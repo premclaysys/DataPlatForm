@@ -1,0 +1,9 @@
+{
+	"name": "adf-nextly-dev-cus-002",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "516c46da-47fe-47d2-9a9b-57c7deca7dbc",
+		"tenantId": "1d20c99d-ca25-4db1-9ff4-dac8e203a50b"
+	}
+}
