@@ -1,0 +1,71 @@
+{
+	"name": "ds_S_StagingCampaignLoan_DEV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LoanID",
+				"type": "varchar"
+			},
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "PartyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanStatusGroup",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanFamilyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanTypeCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanOpenDate",
+				"type": "date"
+			},
+			{
+				"name": "LoanCloseDate",
+				"type": "date"
+			},
+			{
+				"name": "CurrentBalance",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "CreditLimit",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "LoanMaturityDate",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CampaignLoanStaging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "ds_O_DIGITALBANKING_EAGREEMENT_MAPPING",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Altra_Test_Link",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DNACUSTOM",
+			"table": "VW_DIGITALBANKING_EAGREEMENT_MAPPING"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

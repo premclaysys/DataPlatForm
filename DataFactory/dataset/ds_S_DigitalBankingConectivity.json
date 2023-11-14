@@ -1,0 +1,86 @@
+{
+	"name": "ds_S_DigitalBankingConectivity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "AccountNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AccountTransactionNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionFiscalDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionDateTime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionEffectiveDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionTypeCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionSortIndex",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PrincipalAmount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PrincipalBalance",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LoanInterestAmount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CURRRTXNSTATCD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CHECKNBR",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Transactions_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

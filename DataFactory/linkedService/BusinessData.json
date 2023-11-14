@@ -1,0 +1,19 @@
+{
+	"name": "BusinessData",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataQA;User ID=altsqldev",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ALTADFKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "altsqldev"
+			}
+		}
+	}
+}

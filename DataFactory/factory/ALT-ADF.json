@@ -1,0 +1,9 @@
+{
+	"name": "ALT-ADF",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bc1caaa3-910f-4d00-bee5-f7ef54fd52a9",
+		"tenantId": "3514161d-cb67-474a-a76b-399cfc952fa7"
+	}
+}

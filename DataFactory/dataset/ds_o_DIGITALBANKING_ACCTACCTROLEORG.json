@@ -1,0 +1,17 @@
+{
+	"name": "ds_o_DIGITALBANKING_ACCTACCTROLEORG",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Altra_Test_Link",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DNACUSTOM",
+			"table": "VW_DIGITALBANKING_ACCTACCTROLEORG"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

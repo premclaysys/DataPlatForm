@@ -1,0 +1,59 @@
+{
+	"name": "ds_S_DynamicCampaignShareServices",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessData",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "ShareTypeGroupCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareTypeCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareTypeDescription",
+				"type": "varchar"
+			},
+			{
+				"name": "BusinessShareFlag",
+				"type": "bit"
+			},
+			{
+				"name": "ShareGroup1",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareGroup2",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareGroup3",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareGroup4",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CampaignShareServices"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

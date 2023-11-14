@@ -1,0 +1,41 @@
+{
+	"name": "ds_S_InsertDataToActiveAgrmnt_DEV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AGREENBR",
+				"type": "varchar"
+			},
+			{
+				"name": "PERSNBR",
+				"type": "varchar"
+			},
+			{
+				"name": "BYORGNBR",
+				"type": "varchar"
+			},
+			{
+				"name": "DATELASTMAINT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DNAActiveAgrmntData"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

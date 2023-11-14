@@ -1,0 +1,30 @@
+{
+	"name": "PL_BackupRecordsBefore18Months",
+	"properties": {
+		"activities": [
+			{
+				"name": "BackupRecordsBefore18Months",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "dbo.SP_InsertRecordsBefore18Months_TransactionsBackup"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-10-27T05:54:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

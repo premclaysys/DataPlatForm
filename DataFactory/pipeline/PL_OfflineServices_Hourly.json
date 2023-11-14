@@ -1,0 +1,175 @@
+{
+	"name": "PL_OfflineServices_Hourly",
+	"properties": {
+		"activities": [
+			{
+				"name": "DIGITALBANKING_ACCTLOCKOUT",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTLOCKOUT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "    SELECT *\n\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTLOCKOUT\n\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n    AND (InActiveDate IS NULL OR InActiveDate >= SYSDATE);",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "LOCKOUTFLAGCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LOCKOUTFLAGCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_s_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Truncate the staging_DIGITALBANKING_ACCTLOCKOUT",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ACCTLOCKOUT_Staging;\nselect count(*) from DIGITALBANKING_ACCTLOCKOUT_Staging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_s_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Sp_DIGITALBANKING_ACCTLOCKOUT",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_ACCTLOCKOUT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoACCTLOCKOUT]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-11-06T09:16:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

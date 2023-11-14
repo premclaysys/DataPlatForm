@@ -1,0 +1,49 @@
+{
+	"name": "db_s_DIGITALBANKING_ACCTUSERFIELD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACCTNBR",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "USERFIELDCD",
+				"type": "varchar"
+			},
+			{
+				"name": "VALUE",
+				"type": "varchar"
+			},
+			{
+				"name": "VALUELASTUPDATEDDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "DateLastMaint",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ACCTUSERFIELD_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

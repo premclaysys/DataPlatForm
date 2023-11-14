@@ -1,0 +1,60 @@
+{
+	"name": "ds_SS_DynamicCampaignShare",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Dynamic Campaigns",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ShareID",
+				"type": "varchar"
+			},
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "PartyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareStatusGroup",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareTypeGroupCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareTypeCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareOpenDate",
+				"type": "date"
+			},
+			{
+				"name": "ShareCloseDate",
+				"type": "date"
+			},
+			{
+				"name": "CurrentBalance",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "ShareMaturityDate",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "mktg",
+			"table": "Share"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

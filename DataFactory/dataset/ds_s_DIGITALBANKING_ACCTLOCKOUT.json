@@ -1,0 +1,45 @@
+{
+	"name": "ds_s_DIGITALBANKING_ACCTLOCKOUT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ACCTLOCKOUT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACCTNBR",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "EFFDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "LOCKOUTFLAGCD",
+				"type": "varchar"
+			},
+			{
+				"name": "INACTIVEDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ACCTLOCKOUT_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

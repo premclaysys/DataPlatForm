@@ -1,0 +1,75 @@
+{
+	"name": "ds_S_InsertDataToAlerts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "AccountNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AccountTransactionNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionFiscalDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionDateTime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionEffectiveDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionTypeCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionSortIndex",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PrincipalAmount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PrincipalBalance",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LoanInterestAmount",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Transaction_AlertStaging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

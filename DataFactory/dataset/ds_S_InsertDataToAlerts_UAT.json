@@ -1,0 +1,116 @@
+{
+	"name": "ds_S_InsertDataToAlerts_UAT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlMITable",
+		"schema": [
+			{
+				"name": "AccountNumber",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "AccountTransactionNumber",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "TransactionID",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "TransactionFiscalDate",
+				"type": "date"
+			},
+			{
+				"name": "TransactionDateTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "TransactionEffectiveDate",
+				"type": "date"
+			},
+			{
+				"name": "TransactionTypeCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SubAcctNbr",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "BalCatCd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BalTypCd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BalanceDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "TranAmt",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "Balance",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "CheckNbr",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "TraceNbr",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Transaction_AlertStaging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

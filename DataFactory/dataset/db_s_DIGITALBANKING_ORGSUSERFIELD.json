@@ -1,0 +1,47 @@
+{
+	"name": "db_s_DIGITALBANKING_ORGSUSERFIELD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ORGSUSERFIELD_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ORGNBR",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "USERFIELDCD",
+				"type": "varchar"
+			},
+			{
+				"name": "VALUE",
+				"type": "varchar"
+			},
+			{
+				"name": "VALUELASTUPDATEDDA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ORGNAME",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ORGSUSERFIELD_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

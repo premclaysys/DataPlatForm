@@ -1,0 +1,134 @@
+{
+	"name": "PL_InactiveEAgreementNumberDataTransfer",
+	"properties": {
+		"activities": [
+			{
+				"name": "DNA Active Agreement Data Transfor",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the DNAActiveAgrmntData table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AGREENBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "AGREENBR",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BYORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BYORGNBR",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_Connectivity_InactiveEagreement",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Truncate the DNAActiveAgrmntData table",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.DNAActiveAgrmntData;\nSELECT COUNT(*) FROM dbo.DNAActiveAgrmntData",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-27T16:27:58Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

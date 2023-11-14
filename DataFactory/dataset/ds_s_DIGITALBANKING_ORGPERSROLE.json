@@ -1,0 +1,51 @@
+{
+	"name": "ds_s_DIGITALBANKING_ORGPERSROLE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ORGPERSROLE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ORGNBR",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "PERSROLECD",
+				"type": "varchar"
+			},
+			{
+				"name": "EFFDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "PERSNBR",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "INACTIVEDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ORGPERSROLE_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,103 @@
+{
+	"name": "ds_S_DigitalBankingTransactionRecord",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "AccountNumber",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "AccountTransactionNumber",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "TransactionID",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "TransactionFiscalDate",
+				"type": "date"
+			},
+			{
+				"name": "TransactionDateTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "TransactionEffectiveDate",
+				"type": "date"
+			},
+			{
+				"name": "TransactionTypeCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionSortIndex",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "PrincipalAmount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "PrincipalBalance",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "LoanInterestAmount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "CURRRTXNSTATCD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CHECKNBR",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Transactions"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

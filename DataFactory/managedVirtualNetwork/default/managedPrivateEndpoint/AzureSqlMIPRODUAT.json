@@ -1,0 +1,10 @@
+{
+	"name": "AzureSqlMIPRODUAT",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/fa5ce5af-8db2-426e-b50e-23d901fc1249/resourceGroups/altra-cu-prod-srv-rg/providers/Microsoft.Sql/managedInstances/altraprodsql01",
+		"groupId": "managedInstance",
+		"fqdns": [
+			"altraprodsql01.fbfb1f231f1d.database.windows.net"
+		]
+	}
+}

@@ -1,0 +1,54 @@
+{
+	"name": "ds_SS_DynamicCampaignLoanServices",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Dynamic Campaigns",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "LoanFamilyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanTypeCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanTypeDescription",
+				"type": "varchar"
+			},
+			{
+				"name": "BusinessLoanFlag",
+				"type": "bit"
+			},
+			{
+				"name": "LoanGroup1",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanGroup2",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanGroup3",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanGroup4",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "mktg",
+			"table": "LoanServices"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

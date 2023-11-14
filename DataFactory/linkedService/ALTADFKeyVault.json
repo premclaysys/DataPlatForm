@@ -1,0 +1,11 @@
+{
+	"name": "ALTADFKeyVault",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://ALTRA-KEYVAULT.vault.azure.net/"
+		}
+	}
+}

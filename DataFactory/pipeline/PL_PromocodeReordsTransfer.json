@@ -1,0 +1,1086 @@
+{
+	"name": "PL_PromocodeReordsTransfer",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Source to Staging_Maintenance",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate MiniOAOPromocodeMaintenance_Staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PromoCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "PromoCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SavingsAccount",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "SavingsAccount",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "CheckingAccounts",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "CheckingAccounts",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "CertificateAccounts",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "CertificateAccounts",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "MoneyMarketAccounts",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "MoneyMarketAccounts",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "PromoType",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "PromoType",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Promotion",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Promotion",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Promo Start Date",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "Promo Start Date",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Administrator I",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Administrator I",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Administrator II",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Administrator II",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Approvers Name",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Approvers Name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Expiration Date",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "Expiration Date",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Platforms Impacted",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Platforms Impacted",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Age From",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Age From",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Age To",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Age To",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Existing Products",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Existing Products",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Existing Products Checking Types",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Existing Products Checking Types",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Zip Code",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Zip Code",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Open Office",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Open Office",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Balance History Amount",
+									"type": "Double",
+									"physicalType": "float"
+								},
+								"sink": {
+									"name": "Balance History Amount",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Balance History Period",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Balance History Period",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Opening Date From",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "Opening Date From",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Opening Date To",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "Opening Date To",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Transaction Type",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Transaction Type",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Transaction Details",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Transaction Details",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Transaction Details Period",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Transaction Details Period",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Completed Date From",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "Completed Date From",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Completed Date To",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "Completed Date To",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Criteria",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Criteria",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Can Qualify more than once",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "Can Qualify more than once",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "Reward Type",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Reward Type",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Disclosures",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Disclosures",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Transaction Details within",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Transaction Details within",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Rate",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Rate",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Promotion Type Youth",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Promotion Type Youth",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Balance History",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Balance History",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Checkings",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Checkings",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Savings",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Savings",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ActiveInactive",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ActiveInactive",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HubID",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "HubID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Promo Category",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Promo Category",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DetailsQualifications",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "DetailsQualifications",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Marketing Materials",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Marketing Materials",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Market",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Market",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedBy",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CreatedBy",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedBy",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ModifiedBy",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedOn",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "ModifiedOn",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "Reward Amount",
+									"type": "Double",
+									"physicalType": "float"
+								},
+								"sink": {
+									"name": "Reward Amount",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Minimum Balance",
+									"type": "Double",
+									"physicalType": "float"
+								},
+								"sink": {
+									"name": "Minimum Balance",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Aggregate Transaction Amount",
+									"type": "Double",
+									"physicalType": "float"
+								},
+								"sink": {
+									"name": "Aggregate Transaction Amount",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "New Account Deposit Amount",
+									"type": "Double",
+									"physicalType": "float"
+								},
+								"sink": {
+									"name": "New Account Deposit Amount",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Aggregate Days",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Aggregate Days",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Aggregate No",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Aggregate No",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Member Status",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Member Status",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Applicable Region or Market",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Applicable Region or Market",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "UId",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 18
+								},
+								"sink": {
+									"name": "UId",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "Source",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Source",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_ss_PromoCodeMaintenance",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Truncate MiniOAOPromocodeMaintenance_Staging",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromocodeMaintenance_Staging];\nselect count(*) from [dbo].[MiniOAOPromocodeMaintenance_Staging];",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Truncate MiniOAOPromoStaticData_Staging",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromoStaticData_Staging];\r\nselect count(*) from [dbo].[MiniOAOPromoStaticData_Staging];",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Copy Source to Staging_Static",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate MiniOAOPromoStaticData_Staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Display Value",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Display Value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Type",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Type",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Group",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Group",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Description",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Description",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Is Active",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Is Active",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_ss_PromocodeStatic",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "sp_Maintenance",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Truncate MiniOAOPromocodeMaintenance",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_MiniOAOPromoMaintenanceStagingInserttoMiniOAOPromoMaintenance]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "sp_StaticData",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Truncate MiniOAOPromoStaticData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_MiniOAOPromoStaticDataStagingInserttoMiniOAOPromoStaticData]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Truncate MiniOAOPromocodeMaintenance",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Copy Source to Staging_Maintenance",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromocodeMaintenance];\r\nselect count(*) from [dbo].[MiniOAOPromocodeMaintenance];",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenance",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Truncate MiniOAOPromoStaticData",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Copy Source to Staging_Static",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromoStaticData];\r\nselect count(*) from [dbo].[MiniOAOPromoStaticData];",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MiniOAOPromoStaticData",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-11-02T13:33:24Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

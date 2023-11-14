@@ -1,0 +1,35 @@
+{
+	"name": "Str_DeleteRecordsBefore18Months",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_BackupRecordsBefore18Months",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-06-27T08:00:00",
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"hours": [
+						8
+					]
+				}
+			}
+		}
+	}
+}

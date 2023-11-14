@@ -1,0 +1,1383 @@
+{
+	"name": "PL_OffllineServices_Daily",
+	"properties": {
+		"activities": [
+			{
+				"name": "DIGITALBANKING_ORGPERSROLE",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ORGPERSROLE\n \nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   \n",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "PERSROLECD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PERSROLECD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_DIGITALBANKING_ORGPERSROLE",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_s_DIGITALBANKING_ORGPERSROLE",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DIGITALBANKING_PERSUSERFIELD",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_PERSUSERFIELD\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   ",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "USERFIELDCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USERFIELDCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VALUE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VALUELASTUPDATEDDA",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_Persuserfield",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_s_DigitalBanking_persuserfield",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DIGITALBANKING_ACCTACCTROLEPERS",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTACCTROLEPERS\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCTROLECD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCTROLECD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DIGITALBANKING_ACCTACCTROLEORG",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTACCTROLEORG\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "ACCTROLECD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCTROLECD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "ORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_o_DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DIGITALBANKING_EAGREEMENT",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_EAGREEMENT\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AGREENBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "AGREENBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "BYORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BYORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_DIGITALBANKING_EAGREEMENT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_s_DIGITALBANKING_EAGREEMENT",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ORGSUSERFIELD",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_ORGSUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\r\nFROM DNACUSTOM.VW_DIGITALBANKING_ORGSUSERFIELD\r\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\r\n\r\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\n\r\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\n",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "USERFIELDCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USERFIELDCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VALUE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VALUELASTUPDATEDDA",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "ORGNAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORGNAME",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_DIGITALBANKING_ORGSUSERFIELD",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "db_s_DIGITALBANKING_ORGSUSERFIELD",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
+				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ORGPERSROLE_Staging;\nselect count(*) from DIGITALBANKING_ORGPERSROLE_Staging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_s_DIGITALBANKING_ORGPERSROLE",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_PERSUSERFIELD_Staging;\nselect count(*) from DIGITALBANKING_PERSUSERFIELD_Staging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_s_DigitalBanking_persuserfield",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ACCTACCTROLEPERS_Staging;\nselect count(*) from DIGITALBANKING_ACCTACCTROLEPERS_Staging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ACCTACCTROLEORG_Staging;\nselect count(*) from DIGITALBANKING_ACCTACCTROLEORG_Staging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_EAGREEMENT_Staging;\nselect count(*) from DIGITALBANKING_EAGREEMENT_Staging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_s_DIGITALBANKING_EAGREEMENT",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Truncate the staging_ORGSUSERFIELD",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "\nTRUNCATE TABLE DIGITALBANKING_ORGSUSERFIELD_Staging;\nselect count(*) from DIGITALBANKING_ORGSUSERFIELD_Staging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "db_s_DIGITALBANKING_ORGSUSERFIELD",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Sp_DIGITALBANKING_ORGPERSROLE",
+				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_ORGPERSROLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoORGPERSROLE]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_DIGITALBANKING_PERSUSERFIELD",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_PERSUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoPERSUSERFIELD]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_DIGITALBANKING_ACCTACCTROLEPERS",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoACCTACCTROLEPERS]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_DIGITALBANKING_ACCTACCTROLEORG",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InsertToACCTACCTROLEORG]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_DIGITALBANKING_EAGREEMENT",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_EAGREEMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoEAGREEMENT]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_ORGSUSERFIELD",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ORGSUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoORGSUSERFIELD]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Truncate the staging_ACCTUSERFIELD",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "db_s_DIGITALBANKING_ACCTUSERFIELD",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "ACCTUSERFIELD",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_ACCTUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTUSERFIELD\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "USERFIELDCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USERFIELDCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VALUE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_DIGITALBANKING_ACCTUSERFIELD",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "db_s_DIGITALBANKING_ACCTUSERFIELD",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Sp_staging_ACCTUSERFIELD",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ACCTUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoACCTUSERFIELD]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Truncate the staging_EAGREEMENT_MAPPING",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "db_s_DIGITALBANKING_EAGREEMENT_MAPPING",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "EAGREEMENT_MAPPING",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_EAGREEMENT_MAPPING",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_EAGREEMENT_MAPPING\nWHERE TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n\nTO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n\n   AND TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AGREENBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "AGREENBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "BYORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BYORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_DIGITALBANKING_EAGREEMENT_MAPPING",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "db_s_DIGITALBANKING_EAGREEMENT_MAPPING",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Sp_EAGREEMENT_MAPPING",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "EAGREEMENT_MAPPING",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[spi_InserttoEAGREEMENT_MAPPING]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-11-06T09:16:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

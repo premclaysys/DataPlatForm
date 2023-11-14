@@ -1,0 +1,43 @@
+{
+	"name": "ds_s_DigitalBanking_persuserfield",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PERSUSERFIELD_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PERSNBR",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "USERFIELDCD",
+				"type": "varchar"
+			},
+			{
+				"name": "VALUE",
+				"type": "varchar"
+			},
+			{
+				"name": "VALUELASTUPDATEDDA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_PERSUSERFIELD_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

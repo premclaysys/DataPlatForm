@@ -1,0 +1,23 @@
+{
+	"name": "Dynamic Campaigns",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ALTADFKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "NextlyMarketing"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AltraOracleIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

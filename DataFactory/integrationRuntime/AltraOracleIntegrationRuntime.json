@@ -1,0 +1,6 @@
+{
+	"name": "AltraOracleIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

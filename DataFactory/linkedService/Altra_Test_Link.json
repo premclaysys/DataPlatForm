@@ -1,0 +1,23 @@
+{
+	"name": "Altra_Test_Link",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ALTADFKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "nextlytransactionsRO"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AltraOracleIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

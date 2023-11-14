@@ -1,0 +1,65 @@
+{
+	"name": "ds_s_DIGITALBANKING_ACCTBAL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ACCTBALID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACCTNBR",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "BALAMT",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			},
+			{
+				"name": "EFFDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "CURRACCTSTATCD",
+				"type": "varchar"
+			},
+			{
+				"name": "MAJORMINORCD",
+				"type": "varchar"
+			},
+			{
+				"name": "SUBACCTNBR",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "BALANCETYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "AVAILABLEBALANCE_ONLI",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ACCTBAL_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

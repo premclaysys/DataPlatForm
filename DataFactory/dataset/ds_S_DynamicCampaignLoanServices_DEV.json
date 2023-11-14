@@ -1,0 +1,59 @@
+{
+	"name": "ds_S_DynamicCampaignLoanServices_DEV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "LoanFamilyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanTypeCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanTypeDescription",
+				"type": "varchar"
+			},
+			{
+				"name": "BusinessLoanFlag",
+				"type": "bit"
+			},
+			{
+				"name": "LoanGroup1",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanGroup2",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanGroup3",
+				"type": "varchar"
+			},
+			{
+				"name": "LoanGroup4",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CampaignLoanServices"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,51 @@
+{
+	"name": "ds_s_DIGITALBANKING_ACCTACCTROLEORG",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ACCTACCTROLEORGID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACCTNBR",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "ACCTROLECD",
+				"type": "varchar"
+			},
+			{
+				"name": "EFFDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ORGNBR",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "INACTIVEDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ACCTACCTROLEORG_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

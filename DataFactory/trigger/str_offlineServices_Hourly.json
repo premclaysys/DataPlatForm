@@ -1,0 +1,24 @@
+{
+	"name": "str_offlineServices_Hourly",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_OfflineServices_Hourly",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2023-11-02T11:44:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

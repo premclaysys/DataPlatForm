@@ -1,0 +1,17 @@
+{
+	"name": "ds_S_DeleteReordsBefore18Months",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Transactions"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

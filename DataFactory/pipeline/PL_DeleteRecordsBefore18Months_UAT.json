@@ -1,0 +1,31 @@
+{
+	"name": "PL_DeleteRecordsBefore18Months_UAT",
+	"properties": {
+		"activities": [
+			{
+				"name": "DeleteRecordsBefore18Months",
+				"description": "DeleteRecordsBefore18Months ",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[SP_DeleteRecordsBefore18Months]"
+				},
+				"linkedServiceName": {
+					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-07-31T06:37:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

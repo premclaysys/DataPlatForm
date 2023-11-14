@@ -1,0 +1,277 @@
+{
+	"name": "ds_S_MiniOAOPromocodeMaintenance",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessData",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PromoCode",
+				"type": "varchar"
+			},
+			{
+				"name": "SavingsAccount",
+				"type": "bit"
+			},
+			{
+				"name": "CheckingAccounts",
+				"type": "bit"
+			},
+			{
+				"name": "CertificateAccounts",
+				"type": "bit"
+			},
+			{
+				"name": "MoneyMarketAccounts",
+				"type": "bit"
+			},
+			{
+				"name": "PromoType",
+				"type": "varchar"
+			},
+			{
+				"name": "Promotion",
+				"type": "varchar"
+			},
+			{
+				"name": "Status",
+				"type": "varchar"
+			},
+			{
+				"name": "Promo Start Date",
+				"type": "date"
+			},
+			{
+				"name": "Administrator I",
+				"type": "varchar"
+			},
+			{
+				"name": "Administrator II",
+				"type": "varchar"
+			},
+			{
+				"name": "Approvers Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Expiration Date",
+				"type": "date"
+			},
+			{
+				"name": "Platforms Impacted",
+				"type": "varchar"
+			},
+			{
+				"name": "Age From",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Age To",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Existing Products",
+				"type": "varchar"
+			},
+			{
+				"name": "Existing Products Checking Types",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Zip Code",
+				"type": "varchar"
+			},
+			{
+				"name": "Open Office",
+				"type": "varchar"
+			},
+			{
+				"name": "Balance History Amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Balance History Period",
+				"type": "varchar"
+			},
+			{
+				"name": "Opening Date From",
+				"type": "date"
+			},
+			{
+				"name": "Opening Date To",
+				"type": "date"
+			},
+			{
+				"name": "Transaction Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Transaction Details",
+				"type": "varchar"
+			},
+			{
+				"name": "Transaction Details Period",
+				"type": "varchar"
+			},
+			{
+				"name": "Completed Date From",
+				"type": "date"
+			},
+			{
+				"name": "Completed Date To",
+				"type": "date"
+			},
+			{
+				"name": "Criteria",
+				"type": "varchar"
+			},
+			{
+				"name": "Can Qualify more than once",
+				"type": "bit"
+			},
+			{
+				"name": "Reward Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Disclosures",
+				"type": "varchar"
+			},
+			{
+				"name": "Transaction Details within",
+				"type": "varchar"
+			},
+			{
+				"name": "Rate",
+				"type": "varchar"
+			},
+			{
+				"name": "Promotion Type Youth",
+				"type": "varchar"
+			},
+			{
+				"name": "Balance History",
+				"type": "varchar"
+			},
+			{
+				"name": "Checkings",
+				"type": "varchar"
+			},
+			{
+				"name": "Savings",
+				"type": "varchar"
+			},
+			{
+				"name": "ActiveInactive",
+				"type": "varchar"
+			},
+			{
+				"name": "HubID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Promo Category",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DetailsQualifications",
+				"type": "varchar"
+			},
+			{
+				"name": "Marketing Materials",
+				"type": "varchar"
+			},
+			{
+				"name": "Market",
+				"type": "varchar"
+			},
+			{
+				"name": "CreatedBy",
+				"type": "varchar"
+			},
+			{
+				"name": "CreatedOn",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ModifiedBy",
+				"type": "varchar"
+			},
+			{
+				"name": "ModifiedOn",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Reward Amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Minimum Balance",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Aggregate Transaction Amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "New Account Deposit Amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Aggregate Days",
+				"type": "varchar"
+			},
+			{
+				"name": "Aggregate No",
+				"type": "varchar"
+			},
+			{
+				"name": "Member Status",
+				"type": "varchar"
+			},
+			{
+				"name": "Applicable Region or Market",
+				"type": "varchar"
+			},
+			{
+				"name": "UId",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Source",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MiniOAOPromocodeMaintenance"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

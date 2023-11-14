@@ -1,0 +1,44 @@
+{
+	"name": "ds_ss_PromocodeStatic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PromoCode",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Display Value",
+				"type": "varchar"
+			},
+			{
+				"name": "Type",
+				"type": "varchar"
+			},
+			{
+				"name": "Group",
+				"type": "varchar"
+			},
+			{
+				"name": "Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Is Active",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "PromoStaticData"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

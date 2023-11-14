@@ -1,0 +1,32 @@
+{
+	"name": "str_offlineServices_Daily",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_OffllineServices_Daily",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-11-03T12:00:00",
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"minutes": [
+						5
+					],
+					"hours": [
+						12
+					]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,165 @@
+{
+	"name": "ds_s_DIGITALBANKING_ACCTDETAILS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_transactiondb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ACCTDETAILSID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACCTNBR",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "CURRACCTSTATCD",
+				"type": "varchar"
+			},
+			{
+				"name": "MJACCTTYPCD",
+				"type": "varchar"
+			},
+			{
+				"name": "CURRMIACCTTYPCD",
+				"type": "varchar"
+			},
+			{
+				"name": "MIACCTTYPDESC",
+				"type": "varchar"
+			},
+			{
+				"name": "MICUSTDESC",
+				"type": "varchar"
+			},
+			{
+				"name": "ACCTDESC",
+				"type": "varchar"
+			},
+			{
+				"name": "DATEMAT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "TAXRPTFORORGNBR",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "TAXRPTFORPERSNBR",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "CONTRACTDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "CURRDUEDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "PRIORYEARINTERESTPAID",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			},
+			{
+				"name": "CURRENTYEARINTERESTPAID",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			},
+			{
+				"name": "REGULARPAYMENTAMOUNT",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "NOTEBALPERDIEM",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			},
+			{
+				"name": "NOTEINTRATE",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			},
+			{
+				"name": "DEFREMTERM",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TOTALAMOUNTCURRENTLYDUE",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			},
+			{
+				"name": "AMOUNTTOPAYCURRENT",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 5
+			},
+			{
+				"name": "ESTDATEMAT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "CREDITLIMITAMT",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "CURRTERM",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "PMTCALPERIODLIST",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "DEFAULTTERMDAYS",
+				"type": "varchar"
+			},
+			{
+				"name": "DATELASTCONTACT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ACCTDETAILS_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

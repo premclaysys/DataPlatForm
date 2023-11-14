@@ -1,0 +1,103 @@
+{
+	"name": "ds_S_StagingCampignMembers_DEV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PartyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "MemberStatusGroup",
+				"type": "varchar"
+			},
+			{
+				"name": "MembershipOpenDate",
+				"type": "date"
+			},
+			{
+				"name": "MembershipType",
+				"type": "varchar"
+			},
+			{
+				"name": "ZIPCode",
+				"type": "varchar"
+			},
+			{
+				"name": "City",
+				"type": "varchar"
+			},
+			{
+				"name": "State",
+				"type": "varchar"
+			},
+			{
+				"name": "BirthDate",
+				"type": "date"
+			},
+			{
+				"name": "MarketingOptOut",
+				"type": "bit"
+			},
+			{
+				"name": "NewMemberFlag",
+				"type": "bit"
+			},
+			{
+				"name": "OnlineBankingUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "MobileAppUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "QuickAccessUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "EStatementsUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "BillPayUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "ScheduledTransferUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "RemoteDepositUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "SendMoneyUserFlag",
+				"type": "bit"
+			},
+			{
+				"name": "MobileWalletUserFlag",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CampaignMemberStaging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

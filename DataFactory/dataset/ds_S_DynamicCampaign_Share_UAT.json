@@ -1,0 +1,65 @@
+{
+	"name": "ds_S_DynamicCampaign_Share_UAT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlMITable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ShareID",
+				"type": "varchar"
+			},
+			{
+				"name": "AsOfDate",
+				"type": "date"
+			},
+			{
+				"name": "PartyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareStatusGroup",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareTypeGroupCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareTypeCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareOpenDate",
+				"type": "date"
+			},
+			{
+				"name": "ShareCloseDate",
+				"type": "date"
+			},
+			{
+				"name": "CurrentBalance",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "ShareMaturityDate",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CampaignShare"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
